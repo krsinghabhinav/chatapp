@@ -1,0 +1,15 @@
+// {
+//   "id"
+//   "name"
+//   "description"
+//   "profileUrl":
+//   "members":[],
+//   "createdAt"
+//   "createBy"
+//   "status"
+//   "lastMessage":
+//   "lastMessageTime"
+//   "lastMessageBy"
+//   "unReadCount"
+//   "timeStamp"
+// }
