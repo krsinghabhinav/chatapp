@@ -8,6 +8,7 @@ import '../../controller/authController.dart';
 import '../../controller/commanController.dart';
 import '../../controller/splashController.dart';
 import '../../utils/showLogoutDialog.dart';
+import '../groupPage/groupPage.dart';
 import 'widget/chatsPage.dart';
 import 'widget/mytabbar.dart';
 
@@ -100,7 +101,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                 } else if (value == 3) {
                   showLogoutDialog(context); // Call the function correctly
                   // Get.offAllNamed("/authPage");
-                 
+
                   print(
                       "authController.signout()====${authController.signout()}");
                   print("Logged out");
@@ -132,13 +133,8 @@ class _HomePageScreenState extends State<HomePageScreen>
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
               child: Chatspage(),
             ),
-            const Center(
-              child: Text(
-                "Calls",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-              ),
-            ),
-            const Center(
+            Center(child: Grouppage()),
+            Center(
               child: Text(
                 "Settings",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),

@@ -114,7 +114,7 @@ class typingbutton extends StatelessWidget {
                               Get.back();
                               await imagepickercontroller
                                   .pickImage(ImageSource.gallery);
-                              chatcontroller.selectedImagePath.value =
+                              chatcontroller.c.value =
                                   imagepickercontroller.pickedImage.value;
                               print(
                                   "chatcontroller.selectedImagePath.value === ${chatcontroller.selectedImagePath.value}");
