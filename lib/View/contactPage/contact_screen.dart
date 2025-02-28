@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatapp/View/chat/ChatpageDetails.dart';
+import 'package:chatapp/View/group/newGroup/newGroup.dart';
 import 'package:chatapp/controller/profileController.dart';
 import 'package:chatapp/model/userModel.dart';
 import 'package:flutter/material.dart';
@@ -104,6 +105,7 @@ class ContactScreen extends StatelessWidget {
                   title: "New Group",
                   onTab: () {
                     print("New Group Clicked");
+                    Get.to(NewgroupPage());
                   },
                 ),
 

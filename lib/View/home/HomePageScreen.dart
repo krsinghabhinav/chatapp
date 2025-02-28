@@ -8,7 +8,7 @@ import '../../controller/authController.dart';
 import '../../controller/commanController.dart';
 import '../../controller/splashController.dart';
 import '../../utils/showLogoutDialog.dart';
-import '../groupPage/groupPage.dart';
+import '../group/groupPage.dart';
 import 'widget/chatsPage.dart';
 import 'widget/mytabbar.dart';
 
@@ -100,7 +100,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                   print("Settings clicked");
                 } else if (value == 3) {
                   showLogoutDialog(context); // Call the function correctly
-                  // Get.offAllNamed("/authPage");
+                 
 
                   print(
                       "authController.signout()====${authController.signout()}");

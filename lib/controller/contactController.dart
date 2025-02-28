@@ -55,4 +55,30 @@ class Contactcontroller extends GetxController {
     }).toList();
     print("query====${query}");
   }
+
+  Future<void> saveContact(UserModel user) async {
+    try {
+      await db
+          .collection("users")
+          .doc(auth.currentUser!.uid)
+          .collection("contacts")
+          .doc(user.id)
+          .set(user.toJson());
+    } on Exception catch (e) {
+      print("Error saving contact: $e");
+    }
+  }
+
+  Stream<List<UserModel>> getContacts() {
+    return db
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .collection('contacts')
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs
+          .map((doc) => UserModel.fromJson(doc.data()))
+          .toList();
+    });
+  }
 }

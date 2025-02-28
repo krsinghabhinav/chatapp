@@ -303,7 +303,7 @@ class ChatpageDetails extends StatelessWidget {
                                 detailscontroller.image.value)
                             : const NetworkImage(
                                 'https://picsum.photos/200/300'),
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),

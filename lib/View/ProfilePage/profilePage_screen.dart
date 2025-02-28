@@ -86,7 +86,7 @@ class ProfilepageScreen extends StatelessWidget {
                                                 'https://picsum.photos/200/300',
                                           ) as ImageProvider,
                                     fit: BoxFit
-                                        .fill, // Ensures the image fills the entire circle
+                                        .cover, // Ensures the image fills the entire circle
                                   ),
                                 ),
                               ),

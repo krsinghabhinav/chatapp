@@ -1,99 +1,4 @@
-// // import 'package:chatapp/model/chatmodel.dart';
-// // import 'package:cloud_firestore/cloud_firestore.dart';
-// // import 'package:firebase_auth/firebase_auth.dart';
-// // import 'package:get/get.dart';
-// // import 'package:uuid/uuid.dart';
-
-// // class Chatcontroller extends GetxController {
-// //   final auth = FirebaseAuth.instance;
-// //   final db = FirebaseFirestore.instance;
-// //   var isLoading = false.obs;
-
-// //   var uuid = Uuid();
-// //   String getCreateRoomId(String targetUserId) {
-// //     String currentUserId = auth.currentUser!.uid;
-
-// //     if (currentUserId[0].codeUnitAt(0) > targetUserId[0].codeUnitAt(0)) {
-// //       return currentUserId + targetUserId;
-// //     } else {
-// //       return targetUserId + currentUserId;
-// //     }
-// //   }
-
-// //   Future<void> sendMessage(String targetUserId, String message) async {
-// //     isLoading.value = true;
-// //     String roomId = getCreateRoomId(targetUserId);
-// //     String chatid = uuid.v4();
-
-// //     var newChat = Chatmodel(message: message, id: chatid);
-// //     try {
-// //       await db
-// //           .collection("chats")
-// //           .doc(roomId)
-// //           .collection("messages")
-// //           .doc(chatid)
-// //           .set(newChat.toJson());
-// //     } on Exception catch (e) {
-// //       print(e);
-// //     } finally {
-// //       isLoading.value = false;
-// //     }
-// //   }
-// // }
-
-// import 'package:chatapp/model/chatmodel.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:get/get.dart';
-// import 'package:uuid/uuid.dart';
-
-// class Chatcontroller extends GetxController {
-//   final auth = FirebaseAuth.instance;
-//   final db = FirebaseFirestore.instance;
-//   var isLoading = false.obs;
-//   var uuid = Uuid();
-
-//   /// Generates a unique room ID based on the current user and target user
-//   String getCreateRoomId(String targetUserId) {
-//     String currentUserId = auth.currentUser!.uid;
-//     List<String> ids = [currentUserId, targetUserId];
-//     ids.sort(); // Ensures same room ID for both users
-//     return ids.join("_");
-//   }
-
-//   /// Sends a message to Firestore
-//   Future<void> sendMessage(String targetUserId, String message) async {
-//     if (message.trim().isEmpty) return; // Prevent sending empty messages
-
-//     isLoading.value = true;
-//     String currentUserId = auth.currentUser!.uid;
-//     String roomId = getCreateRoomId(targetUserId);
-//     String chatId = uuid.v4(); // Unique message ID
-
-//     var newChat = Chatmodel(
-//       id: chatId,
-//       message: message,
-//       senderId: currentUserId, // Fix: Use the sender's ID
-//       timestamp: Timestamp.now().toDate().toIso8601String(), // Ensure timestamp is stored
-//     );
-
-//     try {
-//       await db
-//           .collection("chats")
-//           .doc(roomId)
-//           .collection("messages")
-//           .doc(chatId)
-//           .set(newChat.toJson());
-
-//       print("Message sent successfully!");
-//     } catch (e) {
-//       print("Error sending message: $e");
-//     } finally {
-//       isLoading.value = false;
-//     }
-//   }
-// }
-
+import 'package:chatapp/controller/contactController.dart';
 import 'package:chatapp/controller/profileController.dart';
 import 'package:chatapp/model/chatmodel.dart';
 import 'package:chatapp/model/userModel.dart';
@@ -114,6 +19,7 @@ class Chatcontroller extends GetxController {
   var uuid = Uuid();
   ProfileController profileController = Get.put(ProfileController());
   var ourchatRoomList = <ChatRoomModel>[].obs;
+  Contactcontroller contactController = Get.put(Contactcontroller());
 
   /// Generates a unique chat room ID based on user IDs
   String getCreateRoomId(String targetUserId) {
@@ -125,132 +31,6 @@ class Chatcontroller extends GetxController {
       return targetUserId + currentUserId;
     }
   }
-
-  // /// Sends a message to Firestore
-  // Future<void> sendMessage(
-  //   String targetUserId,
-  //   String message,
-  //   UserModel targetUser,
-  // ) async {
-  //   if (message.trim().isEmpty) {
-  //     return;
-  //   }
-  //   ; // Prevent sending empty messages
-
-  //   isLoading.value = true;
-  //   String currentUserId = auth.currentUser!.uid;
-  //   String roomId = getCreateRoomId(targetUserId);
-  //   String chatId = uuid.v4();
-
-  //   // Unique message ID
-
-  //   if (selectedImagePath.value.isNotEmpty) {
-  //     chatImageUrl.value = (await profileController
-  //             .uploadImageToFirebaseStorage(selectedImagePath.value)) ??
-  //         "";
-  //   }
-
-  //   var newChat = Chatmodel(
-  //     id: chatId,
-  //     message: message,
-  //     senderId: currentUserId, // Sender is the current user
-  //     timestamp: Timestamp.now().toDate().toIso8601String(),
-  //     senderName: profileController.currentUser.value.name,
-  //     receiverId: targetUserId,
-  //     imageUrl: chatImageUrl.value,
-  //   );
-  //   print("chatimageurl======${chatImageUrl.value}");
-  //   var roomDetails = ChatRoomModel(
-  //     id: roomId,
-  //     lastMessage: message,
-  //     lastMessageTimestamp: Timestamp.now().toDate().toIso8601String(),
-  //     sender: profileController.currentUser.value,
-  //     receiver: targetUser,
-  //     timestamp: DateTime.now().toString(),
-  //     unReadMessNo: 0,
-  //   );
-  //   try {
-  //     await db
-  //         .collection("chats")
-  //         .doc(roomId)
-  //         .collection("messages")
-  //         .doc(chatId)
-  //         .set(newChat.toJson());
-  //     await db.collection("chats").doc(roomId).set(
-  //           roomDetails.toJson(),
-  //         );
-
-  //     print("senderName===  ${profileController.currentUser.value.name}");
-  //     print("Message sent successfully!");
-  //   } catch (e) {
-  //     print("Error sending message: $e");
-  //   } finally {
-  //     isLoading.value = false;
-  //   }
-  // }
-
-  // Future<void> sendMessage(
-  //   String targetUserId,
-  //   String message,
-  //   UserModel targetUser,
-  // ) async {
-  //   if (message.trim().isEmpty && selectedImagePath.value.isEmpty) {
-  //     return;
-  //   }
-
-  //   isLoading.value = true;
-  //   String currentUserId = auth.currentUser!.uid;
-  //   String roomId = getCreateRoomId(targetUserId);
-  //   String chatId = uuid.v4();
-
-  //   // Upload image if selected
-  //   if (selectedImagePath.value.isNotEmpty) {
-  //     chatImageUrl.value = (await profileController
-  //             .uploadImageToFirebaseStorage(selectedImagePath.value)) ??
-  //         "";
-  //   }
-
-  //   var newChat = Chatmodel(
-  //     id: chatId,
-  //     message: message,
-  //     senderId: currentUserId,
-  //     timestamp: Timestamp.now().toDate().toIso8601String(),
-  //     senderName: profileController.currentUser.value.name,
-  //     receiverId: targetUserId,
-  //     imageUrl: chatImageUrl.value, // Attach image URL if available
-  //   );
-
-  //   var roomDetails = ChatRoomModel(
-  //     id: roomId,
-  //     lastMessage: message.isNotEmpty ? message : "Photo",
-  //     lastMessageTimestamp: Timestamp.now().toDate().toIso8601String(),
-  //     sender: profileController.currentUser.value,
-  //     receiver: targetUser,
-  //     timestamp: DateTime.now().toString(),
-  //     unReadMessNo: 0,
-  //   );
-
-  //   try {
-  //     await db
-  //         .collection("chats")
-  //         .doc(roomId)
-  //         .collection("messages")
-  //         .doc(chatId)
-  //         .set(newChat.toJson());
-  //     selectedImagePath.value = " ";
-  //     print("🔄 Clearing image after sending...");
-  //     print("🖼️ Image Path: ${selectedImagePath.value}");
-  //     await db.collection("chats").doc(roomId).set(roomDetails.toJson());
-
-  //     print("Message sent successfully!");
-  //   } catch (e) {
-  //     print("Error sending message: $e");
-  //   } finally {
-  //     isLoading.value = false;
-  //     message = "";
-  //     selectedImagePath.value = "";
-  //   }
-  // }
 
   Future<void> sendMessage(
       String targetUserId, String message, UserModel targetUser) async {
@@ -300,11 +80,11 @@ class Chatcontroller extends GetxController {
           .doc(chatId)
           .set(newChat.toJson());
       await db.collection("chats").doc(roomId).set(roomDetails.toJson());
-
+      await contactController.saveContact(targetUser);
       print("📤 Message Sent: $message | Image: $imageUrl");
 
       // ✅ Clear after sending
-    
+
       selectedImagePath.value = "";
       print("🔄  Image Cleared!");
     } catch (e) {

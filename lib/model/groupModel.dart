@@ -1,6 +1,6 @@
 import 'package:chatapp/model/userModel.dart';
 
-class ChatModel {
+class GroupModel {
   String? id;
   String? name;
   String? description;
@@ -15,7 +15,7 @@ class ChatModel {
   int? unReadCount;
   String? timeStamp;
 
-  ChatModel({
+  GroupModel({
     this.id,
     this.name,
     this.description,
@@ -31,13 +31,16 @@ class ChatModel {
     this.timeStamp,
   });
 
-  factory ChatModel.fromJson(Map<String, dynamic> json) {
-    return ChatModel(
+  factory GroupModel.fromJson(Map<String, dynamic> json) {
+    return GroupModel(
       id: json['id'],
       name: json['name'],
       description: json['description'],
       profileUrl: json['profileUrl'],
-      members: List<UserModel>.from(json['members'] ?? []),
+      // members: List<UserModel>.from(json['members'] ?? []),
+      members: (json['members'] as List<dynamic>?)
+          ?.map((e) => UserModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       createdAt: json['createdAt'],
       createBy: json['createBy'],
       status: json['status'],
@@ -55,7 +58,8 @@ class ChatModel {
       'name': name,
       'description': description,
       'profileUrl': profileUrl,
-      'members': members,
+      // 'members': members,
+      'members': members?.map((e) => e.toJson()).toList(),
       'createdAt': createdAt,
       'createBy': createBy,
       'status': status,
