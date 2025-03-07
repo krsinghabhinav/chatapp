@@ -1,0 +1,2 @@
+D:/lifechangingProjects/chatapp/android/app/.cxx/RelWithDebInfo/aq45qm3w/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/lifechangingProjects/chatapp/android/app/.cxx/RelWithDebInfo/aq45qm3w/armeabi-v7a/CMakeFiles/rebuild_cache.dir
