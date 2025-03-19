@@ -3,29 +3,27 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:chatapp/config/themes.dart';
 import 'package:chatapp/config/pagePathRouting.dart'; // Your page routes
-import 'controller/authController.dart';
-import 'controller/callCntroller.dart';
-import 'controller/commanController.dart';
-import 'controller/splashController.dart';
+import 'package:get_storage/get_storage.dart';
+
+import 'features/internet_connectivity/controller/internet_connctivity_controller.dart';
 import 'firebase_options.dart'; // Firebase configuration file
 import 'View/splashView/splashScreen.dart';
 
 void main() async {
+  await GetStorage.init();
+  Get.put(InternetConnectivityController(), permanent: true);
   WidgetsFlutterBinding.ensureInitialized();
 
   // Initialize Firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  Get.put(Commancontroller()); // Fix: Register missing controller
-  Get.put(Splashcontroller());
-  Get.put(AuthController());
-  runApp( MyApp());
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-   MyApp({super.key});
-    CallController callController = Get.put(CallController());
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,9 @@ import 'package:chatapp/controller/imagePickerController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../chatBot/screen/chatScreen.dart';
 import '../../../controller/chatController.dart';
 import '../../../model/userModel.dart';
 
@@ -138,18 +140,21 @@ class typingbutton extends StatelessWidget {
                           child: TextButton(
                             onPressed: () async {
                               Get.back();
+                              Get.to(
+                                ChatScreen(),
+                              );
                             },
                             child: Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Icon(
-                                  Icons.play_arrow,
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Icon(FontAwesomeIcons.robot,
                                   size: 40,
-                                )),
+                                  color: const Color.fromARGB(255, 4, 43, 153)),
+                            ),
                           ),
                         )
                       ],

@@ -3,6 +3,8 @@ import 'package:chatapp/config/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../config/contColors.dart';
+import '../../controller/authController.dart';
+import '../../controller/commanController.dart';
 import '../../controller/splashController.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,7 +17,8 @@ class _SplashScreenState extends State<SplashScreen>
   late final AnimationController _animationController;
   late final Animation<double> _bounceAnimation;
   Splashcontroller splashController = Get.put(Splashcontroller());
-
+  Commancontroller commancontroller = Get.put(Commancontroller());
+  AuthController authController = Get.put(AuthController());
   @override
   void initState() {
     super.initState();
