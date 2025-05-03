@@ -1,0 +1,1 @@
+C:\chatapp\build\app\intermediates\cxx\RelWithDebInfo\611z542z\obj\armeabi-v7a

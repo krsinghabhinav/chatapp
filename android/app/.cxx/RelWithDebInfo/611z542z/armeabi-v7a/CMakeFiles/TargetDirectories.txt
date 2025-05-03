@@ -1,0 +1,2 @@
+C:/chatapp/android/app/.cxx/RelWithDebInfo/611z542z/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/chatapp/android/app/.cxx/RelWithDebInfo/611z542z/armeabi-v7a/CMakeFiles/rebuild_cache.dir
