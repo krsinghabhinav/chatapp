@@ -1,4 +1,5 @@
 import 'package:chatapp/controller/chatController.dart';
+import 'package:chatapp/search_screen.dart/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:math';
@@ -90,7 +91,8 @@ class _HomePageScreenState extends State<HomePageScreen>
             IconButton(
               icon: const Icon(Icons.search, size: 26),
               onPressed: () {
-                Chatcontroller().getChatRoomList();
+                // Chatcontroller().getChatRoomList();
+                Get.to(SearchScreen());
               },
             ),
             PopupMenuButton<int>(
@@ -135,9 +137,7 @@ class _HomePageScreenState extends State<HomePageScreen>
               child: Chatspage(),
             ),
             Center(child: Grouppage()),
-            Center(
-              child: Callhistory()
-            ),
+            Center(child: Callhistory()),
           ],
         ),
       ),
