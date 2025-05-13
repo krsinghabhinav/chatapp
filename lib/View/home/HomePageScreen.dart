@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:math';
 
+import '../../chatBot/screen/chatScreen.dart';
 import '../../config/images.dart';
 import '../../controller/authController.dart';
 import '../../controller/commanController.dart';
@@ -91,8 +92,12 @@ class _HomePageScreenState extends State<HomePageScreen>
             IconButton(
               icon: const Icon(Icons.search, size: 26),
               onPressed: () {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => SearchScreen()));
+                });
                 // Chatcontroller().getChatRoomList();
-                Get.to(SearchScreen());
+                // Get.to(SearchScreen());
               },
             ),
             PopupMenuButton<int>(
@@ -130,16 +135,40 @@ class _HomePageScreenState extends State<HomePageScreen>
           },
           child: const Icon(Icons.add, color: Colors.white, size: 30),
         ),
-        body: TabBarView(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
-              child: Chatspage(),
+        body: Stack(children: [
+          TabBarView(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
+                child: Chatspage(),
+              ),
+              Center(child: Grouppage()),
+              Center(child: Callhistory()),
+            ],
+          ),
+          Positioned(
+            bottom: 80,
+            right: 17,
+            child: GestureDetector(
+              onTap: () {
+                Get.to(ChatScreen());
+                print("tap ai");
+              },
+              child: Card(
+                color: Colors.blueGrey,
+                child: Container(
+                    child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Image.asset(
+                    "assets/icons/a.png",
+                    height: 40,
+                    width: 40,
+                  ),
+                )),
+              ),
             ),
-            Center(child: Grouppage()),
-            Center(child: Callhistory()),
-          ],
-        ),
+          )
+        ]),
       ),
     );
   }

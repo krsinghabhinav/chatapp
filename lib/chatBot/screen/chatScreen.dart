@@ -32,19 +32,17 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black12,
       appBar: AppBar(
         title: const Text(
-          "ChatBot",
-          style: TextStyle(color: Colors.black),
+          "Ask Me Anything",
+          style: TextStyle(color: Colors.white),
         ),
         scrolledUnderElevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black12,
         centerTitle: true,
       ),
       body: Column(
@@ -158,7 +156,6 @@ class _ChatScreenState extends State<ChatScreen> {
                       messageController
                           .sendMessage(chatMessageControl.text.trim());
                       chatMessageControl.clear();
-                      
                     }
                   },
                   backgroundColor: Colors.green,

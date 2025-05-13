@@ -27,8 +27,12 @@ class _SearchScreenState extends State<SearchScreen> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    contactcontroller.searchController.dispose();
-    Get.to(HomePageScreen());
+    Get.delete<Contactcontroller>();
+    Get.delete<ProfileController>();
+    Get.delete<Detailscontroller>();
+    Get.delete<Chatcontroller>();
+    //contactcontroller.searchController.dispose();
+    //Get.to(HomePageScreen());
   }
 
   @override
@@ -98,6 +102,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       );
                       chatcontroller.getCreateRoomId(data.id.toString());
                       print("data id ==== ${data.id}");
+                      Get.back();
                       // Get.toNamed("/chatPageDetails");
                       Get.to(
                         () => ChatpageDetails(
